@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  api:
+    build:
+      context: .
+      target: development
+      dockerfile: ./Dockerfile
+    container_name: api
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: yarn start:debug
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    depends_on:
+      - db
+  db:
+    image: mysql
+    command: --authentication_policy=mysql_native_password
+    restart: always
+    env_file:
+      - .env
