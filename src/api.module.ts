@@ -5,6 +5,7 @@ import { NestFactory } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import validationSchema from 'common/configuration';
+import GymsModule from 'gyms/gyms.module';
 
 @Module({
   imports: [
@@ -22,9 +23,12 @@ import validationSchema from 'common/configuration';
         url: configService.get<string>('DATABASE_URL'),
         autoLoadEntities: true,
         synchronize: false,
+        migrations: ['dist/migrations/*{.ts,.js}'],
+        migrationsRun: true,
       }),
       inject: [ConfigService],
     }),
+    GymsModule,
   ],
 })
 export class ApiModule {
