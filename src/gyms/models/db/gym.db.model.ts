@@ -1,4 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import Gym from '../base/gym.base.model';
 
 @Entity({ name: 'gyms' })
@@ -20,4 +26,10 @@ export default class GymDbModel implements Gym {
 
   @Column({ nullable: true })
   country: string;
+
+  @CreateDateColumn()
+  createdAt?: Date;
+
+  @UpdateDateColumn()
+  updatedAt?: Date;
 }

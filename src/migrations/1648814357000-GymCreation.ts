@@ -38,6 +38,17 @@ export class GymCreation1648814357000 implements MigrationInterface {
           type: 'varchar',
           length: '255',
         },
+        {
+          name: 'createdAt',
+          type: 'timestamp',
+          default: 'now()',
+        },
+        {
+          name: 'updatedAt',
+          type: 'timestamp',
+          default: 'now()',
+          onUpdate: 'now()',
+        },
       ],
     });
     await queryRunner.createTable(gymsTable);
