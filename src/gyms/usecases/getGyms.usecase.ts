@@ -8,6 +8,6 @@ export default class GetGymsUseCase {
   constructor(private readonly gymsRepository: GymsRepository) {}
 
   async execute(args: GetGymsGqlArgs): Promise<GetGymsGqlOutput> {
-    return this.gymsRepository.getAllList(args);
+    return this.gymsRepository.getList(args);
   }
 }

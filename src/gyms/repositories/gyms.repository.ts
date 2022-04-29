@@ -7,7 +7,7 @@ import Gym from 'gyms/models/base/gym.base.model';
 export default class GymsRepository {
   constructor(private readonly gymsDbRepository: GymsDbRepository) {}
 
-  async getAllList(args: GetGymsArgs): Promise<GetGymsOutput> {
+  async getList(args: GetGymsArgs): Promise<GetGymsOutput> {
     return this.gymsDbRepository.getPaginatedListByQueryArgs(args);
   }
 

@@ -13,21 +13,10 @@ import GymsModule from 'gyms/gyms.module';
     GraphQLModule.forRoot({
       driver: ApolloDriver,
       playground: false,
-      autoSchemaFile: 'schema.gql',
+      autoSchemaFile: true,
       sortSchema: true,
     }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        type: 'mysql',
-        url: configService.get<string>('DATABASE_URL'),
-        autoLoadEntities: true,
-        synchronize: false,
-        migrations: ['dist/migrations/*{.ts,.js}'],
-        migrationsRun: true,
-      }),
-      inject: [ConfigService],
-    }),
+    TypeOrmModule.forRoot(),
     GymsModule,
   ],
 })
