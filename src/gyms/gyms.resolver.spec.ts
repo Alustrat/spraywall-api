@@ -9,6 +9,7 @@ import { getMockGym, getMockGymList } from 'mocks/gyms.mock';
 import GetGymsGqlArgs from './dto/args/getGyms.gql.args';
 import CreateGymGqlArgs from './dto/args/createGym.gql.args';
 import UpdateGymGqlArgs from './dto/args/updateGym.gql.args';
+import { DeleteGymGqlArgs } from './dto/args/deleteGym.gql.args';
 
 describe('GymsResolver', () => {
   let gymsResolver: GymsResolver;
@@ -88,8 +89,9 @@ describe('GymsResolver', () => {
   describe('getGym', () => {
     it('should successfully call usecase and return usecase output', async () => {
       // Given
+      const args = <DeleteGymGqlArgs>{ id: 99 };
       // When
-      const result = await gymsResolver.getGym(99);
+      const result = await gymsResolver.getGym(args);
       // Then
       expect(getGymUseCase.execute).toHaveBeenCalledWith(99);
       expect(result).toEqual(gymById);
@@ -133,8 +135,9 @@ describe('GymsResolver', () => {
   describe('deleteGym', () => {
     it('should successfully call usecase and return usecase output', async () => {
       // Given
+      const args = <DeleteGymGqlArgs>{ id: 99 };
       // When
-      const result = await gymsResolver.deleteGym(99);
+      const result = await gymsResolver.deleteGym(args);
       // Then
       expect(deleteGymUseCase.execute).toHaveBeenCalledWith(99);
       expect(result).toEqual(true);

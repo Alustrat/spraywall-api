@@ -10,6 +10,10 @@ export interface GetGymsArgs extends QueryPaginationArgs {
   country: string;
 }
 
+export interface GetGymArgs {
+  id: number;
+}
+
 export interface CreateGymArgs {
   name: string;
   image?: string;
@@ -25,6 +29,10 @@ export interface UpdateGymArgs {
   address?: string;
   city?: string;
   country?: string;
+}
+
+export interface DeleteGymArgs {
+  id: number;
 }
 
 export interface GetGymsOutput {
