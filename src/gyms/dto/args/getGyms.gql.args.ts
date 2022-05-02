@@ -1,5 +1,6 @@
 import { ArgsType, Field, Int } from '@nestjs/graphql';
 import { IsOptional } from 'class-validator';
+import { gqlType } from 'common/utilities/gql-functions';
 import { GetGymsArgs } from '../base/gyms.base.dto';
 
 @ArgsType()
@@ -16,11 +17,11 @@ export default class GetGymsGqlArgs implements GetGymsArgs {
   @IsOptional()
   country: string;
 
-  @Field(() => Int, { defaultValue: 50 })
+  @Field(gqlType(Int), { defaultValue: 50 })
   @IsOptional()
   limit: number;
 
-  @Field(() => Int, { defaultValue: 0 })
+  @Field(gqlType(Int), { defaultValue: 0 })
   @IsOptional()
   offset: number;
 }

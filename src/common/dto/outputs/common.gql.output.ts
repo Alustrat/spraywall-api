@@ -1,14 +1,15 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { gqlType } from 'common/utilities/gql-functions';
 import { QueryPaginationOutput } from '../base/common.base.dto';
 
 @ObjectType('Pagination', { description: 'Pagination' })
 export default class QueryPaginationGqlOutput implements QueryPaginationOutput {
-  @Field(() => Int)
+  @Field(gqlType(Int))
   total: number;
 
-  @Field(() => Int)
+  @Field(gqlType(Int))
   rows: number;
 
-  @Field(() => Int)
+  @Field(gqlType(Int))
   remaining: number;
 }

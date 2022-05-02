@@ -1,9 +1,10 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { gqlType } from 'common/utilities/gql-functions';
 import Gym from '../base/gym.base.model';
 
 @ObjectType('Gym', { description: 'Gym' })
 export default class GymGqlModel implements Gym {
-  @Field(() => Int)
+  @Field(gqlType(Int))
   id: number;
 
   @Field()

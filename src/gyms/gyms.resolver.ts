@@ -1,5 +1,5 @@
 import { Args, Query, Mutation, Resolver } from '@nestjs/graphql';
-import BaseResolver from 'common/common.resolver';
+import { gqlType } from 'common/utilities/gql-functions';
 import CreateGymGqlArgs from './dto/args/createGym.gql.args';
 import { DeleteGymGqlArgs } from './dto/args/deleteGym.gql.args';
 import { GetGymGqlArgs } from './dto/args/getGym.gql.args';
@@ -14,38 +14,36 @@ import GetGymsUseCase from './usecases/getGyms.usecase';
 import UpdateGymUseCase from './usecases/updateGym.usecase';
 
 @Resolver(GymGqlModel)
-export default class GymsResolver extends BaseResolver {
+export default class GymsResolver {
   constructor(
     private readonly getGymsUseCase: GetGymsUseCase,
     private readonly getGymUseCase: GetGymUseCase,
     private readonly createGymUseCase: CreateGymUseCase,
     private readonly updateGymUseCase: UpdateGymUseCase,
     private readonly deleteGymUseCase: DeleteGymUseCase,
-  ) {
-    super();
-  }
+  ) {}
 
-  @Query(BaseResolver.getGqlType(GetGymsGqlOutput))
+  @Query(gqlType(GetGymsGqlOutput))
   async getGyms(@Args() args: GetGymsGqlArgs): Promise<GetGymsGqlOutput> {
     return this.getGymsUseCase.execute(args);
   }
 
-  @Query(BaseResolver.getGqlType(GymGqlModel))
+  @Query(gqlType(GymGqlModel))
   async getGym(@Args() args: GetGymGqlArgs): Promise<GymGqlModel> {
     return this.getGymUseCase.execute(args.id);
   }
 
-  @Mutation(BaseResolver.getGqlType(GymGqlModel))
+  @Mutation(gqlType(GymGqlModel))
   async createGym(@Args() args: CreateGymGqlArgs): Promise<GymGqlModel> {
     return this.createGymUseCase.execute(args);
   }
 
-  @Mutation(BaseResolver.getGqlType(GymGqlModel))
+  @Mutation(gqlType(GymGqlModel))
   async updateGym(@Args() args: UpdateGymGqlArgs): Promise<GymGqlModel> {
     return this.updateGymUseCase.execute(args);
   }
 
-  @Mutation(BaseResolver.getGqlType(Boolean))
+  @Mutation(gqlType(Boolean))
   async deleteGym(@Args() args: DeleteGymGqlArgs): Promise<boolean> {
     return this.deleteGymUseCase.execute(args.id);
   }
