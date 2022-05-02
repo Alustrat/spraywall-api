@@ -5,6 +5,7 @@ import { NestFactory } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import validationSchema from 'common/configuration';
+import GymsModule from 'gyms/gyms.module';
 
 @Module({
   imports: [
@@ -12,19 +13,11 @@ import validationSchema from 'common/configuration';
     GraphQLModule.forRoot({
       driver: ApolloDriver,
       playground: false,
-      autoSchemaFile: 'schema.gql',
+      autoSchemaFile: true,
       sortSchema: true,
     }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        type: 'mysql',
-        url: configService.get<string>('DATABASE_URL'),
-        autoLoadEntities: true,
-        synchronize: false,
-      }),
-      inject: [ConfigService],
-    }),
+    TypeOrmModule.forRoot(),
+    GymsModule,
   ],
 })
 export class ApiModule {

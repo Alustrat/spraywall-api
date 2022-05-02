@@ -18,6 +18,7 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
+      "mocks/*": ["test/mocks/*"],
       "common/*": ["src/common/*"],
       "gyms/*": ["src/gyms/*"]
     }
